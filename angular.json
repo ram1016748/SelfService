@@ -1,0 +1,198 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "partner-self-service": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "polyfills": "src/polyfills.ts",
+            "assets": [
+              "src/assets",
+              "src/favicon.ico"
+            ],
+            "styles": [
+              "src/assets/css/playbook.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "src/styles.css"
+            ],
+            "scripts": [
+              "src/assets/js/playbook.min.js",
+              "node_modules/moment/min/moment.min.js",
+              "src/assets/js/tpaSelfAdminTool.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/./environments/environment.ts",
+                  "with": "src/./environments/environment.prod.ts"
+                }
+              ]
+            },
+            "development": {
+              "fileReplacements": [
+                {
+                  "replace": "src/./environments/environment.ts",
+                  "with": "src/./environments/environment.dev.ts"
+                }
+              ]
+            },
+            "development2": {
+              "fileReplacements": [
+                {
+                  "replace": "src/./environments/environment.ts",
+                  "with": "src/./environments/environment.dev2.ts"
+                }
+              ]
+            },
+            "qa": {
+              "fileReplacements": [
+                {
+                  "replace": "src/./environments/environment.ts",
+                  "with": "src/./environments/environment.qa.ts"
+                }
+              ]
+            },
+            "qa2": {
+              "fileReplacements": [
+                {
+                  "replace": "src/./environments/environment.ts",
+                  "with": "src/./environments/environment.qa2.ts"
+                }
+              ]
+            },
+            "stage": {
+              "fileReplacements": [
+                {
+                  "replace": "src/./environments/environment.ts",
+                  "with": "src/./environments/environment.stage.ts"
+                }
+              ]
+            },
+            "stage2": {
+              "fileReplacements": [
+                {
+                  "replace": "src/./environments/environment.ts",
+                  "with": "src/./environments/environment.stage2.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "partner-self-service:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "partner-self-service:build:prod"
+            },
+            "dev2": {
+              "browserTarget": "partner-self-service:build:dev2"
+            },
+            "qa": {
+              "browserTarget": "partner-self-service:build:qa"
+            },
+            "qa2": {
+              "browserTarget": "partner-self-service:build:qa2"
+            },
+            "stage": {
+              "browserTarget": "partner-self-service:build:stage"
+            },
+            "stage2": {
+              "browserTarget": "partner-self-service:build:stage2"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "partner-self-service:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "karmaConfig": "./karma.conf.js",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "scripts": [
+              "src/assets/js/playbook.min.js",
+              "node_modules/moment/min/moment.min.js",
+              "src/assets/js/tpaSelfAdminTool.js"
+            ],
+            "styles": [
+              "src/assets/css/playbook.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "src/styles.css"
+            ],
+            "assets": [
+              "src/assets",
+              "src/favicon.ico"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "partner-self-service-e2e": {
+      "root": "",
+      "sourceRoot": "e2e",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "./protractor.conf.js",
+            "devServerTarget": "partner-self-service:serve"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "partner-self-service",
+  "schematics": {
+    "@schematics/angular:component": {
+      "prefix": "app",
+      "styleext": "css"
+    },
+    "@schematics/angular:directive": {
+      "prefix": "app"
+    }
+  }
+}
